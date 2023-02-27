@@ -10,18 +10,18 @@ $template = $twig->load('example.html.twig');
 $menu_items = [
   [
       'label' => 'Home',
-      'href' => '#',
-      'active' => TRUE,
+      'href' => '/',
+      'active' => ($_SERVER['REQUEST_URI'] != '/features' && $_SERVER['REQUEST_URI'] != '/contact'),
   ],
   [
       'label' => 'Features',
-      'href' => '#',
-      'active' => FALSE,
+      'href' => '/features',
+      'active' => ($_SERVER['REQUEST_URI'] == '/features'),
   ],
   [
       'label' => 'Contact',
-      'href' => 'https://google.com.ua/',
-      'active' => FALSE,
+      'href' => '/contact',
+      'active' => ($_SERVER['REQUEST_URI'] == '/contact'),
   ],
 ];
 
