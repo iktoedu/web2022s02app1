@@ -1,10 +1,17 @@
 <?php
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$twig_loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
+$twig = new \Twig\Environment($twig_loader, []);
+
+$template = $twig->load('example.html.twig');
+
 $menu_items = [
   [
       'label' => 'Home',
       'href' => '#',
-      'active' => FALSE,
+      'active' => TRUE,
   ],
   [
       'label' => 'Features',
@@ -14,12 +21,8 @@ $menu_items = [
   [
       'label' => 'Contact',
       'href' => 'https://google.com.ua/',
-      'active' => TRUE,
+      'active' => FALSE,
   ],
 ];
 
-ob_start();
-include __DIR__ . '/../templates/example.tpl.php';
-$output = ob_get_clean();
-
-echo $output;
+echo $template->render(['menu_items' => $menu_items]);
