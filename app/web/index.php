@@ -2,27 +2,21 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$twig_loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
-$twig = new \Twig\Environment($twig_loader, []);
+use Symfony\Component\HttpFoundation\Request;
 
-$template = $twig->load('example.html.twig');
+$request = Request::createFromGlobals();
 
-$menu_items = [
-  [
-      'label' => 'Home',
-      'href' => '/',
-      'active' => ($_SERVER['REQUEST_URI'] != '/features' && $_SERVER['REQUEST_URI'] != '/contact'),
-  ],
-  [
-      'label' => 'Features',
-      'href' => '/features',
-      'active' => ($_SERVER['REQUEST_URI'] == '/features'),
-  ],
-  [
-      'label' => 'Contact',
-      'href' => '/contact',
-      'active' => ($_SERVER['REQUEST_URI'] == '/contact'),
-  ],
-];
+$controller = new \App\Controller\MainController();
+switch ($request->getPathInfo()) {
+    case '/features':
+        $response = $controller->featuresAction($request);
+        break;
+    case '/contact':
+        $response = $controller->contactAction($request);
+        break;
+    default:
+        $response = $controller->indexAction($request);
+        break;
+}
 
-echo $template->render(['menu_items' => $menu_items]);
+$response->send();
