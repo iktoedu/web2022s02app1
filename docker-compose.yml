@@ -6,4 +6,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - "./app/web:/var/www/html:rw"
+      - "./app:/var/www:rw"
+    environment:
+      WWW_DATA_USER_UID: 1000
+      WWW_DATA_GROUP_GID: 1000

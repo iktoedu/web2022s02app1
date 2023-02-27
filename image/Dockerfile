@@ -12,6 +12,7 @@ RUN set -uxe; \
     mv /build/entrypoint-script/* /entrypoint-data/init.d; \
     chmod a+x /entrypoint.sh; \
     rm -rf /build; \
+    sed -i 's/\/var\/www\/html/\/var\/www\/web/' /etc/apache2/sites-available/000-default.conf; \
     /bin/true
 
 ENTRYPOINT ["/entrypoint.sh"]
