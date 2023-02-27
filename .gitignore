@@ -1,1 +1,5 @@
 /app/node_modules
+/app/vendor
+/app/.composer
+/app/.bash_history
+/app/composer.phar
